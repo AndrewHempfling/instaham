@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous" />
+    <title>title</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-primary" id="p" type="button">Text</button>
+            </div>
+            <textarea name="" id="tt" cols="30" rows="10"></textarea>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script>
+        $(function() {
+            var rr = [];
+
+            $('.MosiacAsset-module__thumb___L2F4y').map(function() {
+                return $(this).html();
+            }).get();
+
+            $('.recipe-review-body').map(function() {
+                return $(this).html().replace(/\n\s+?(\w)/g, '$1').replace(/^\s+/g, '');
+            }).get().join('').split(/[\!\.]/).filter(x => x.length > 2).map(x => x.replace(/^\s+/g, ''));
+
+
+            $('a[name="lnkName"]').map(function() {
+                return $(this).html();
+            }).get();
+
+            $.get('js/ham-pics.json', function(p) {
+                pics = p;
+            });
+
+            $('#p').click(function() {
+                $.get('https://randomuser.me/api/', function(u) {
+
+                    rr.push(u.results[0].picture.medium);
+                })
+                $('#tt').val(JSON.stringify(rr, null, 4));
+                console.log(rr);
+            });
+
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
+    <title>insterblerg</title>
+
+    <style>
+        .navbar-brand {
+            font-family: 'Lobster', cursive;
+        }
+        
+        .bg-purple {
+            background-color: #20c997;
+        }
+        
+        #imgs {
+            background-color: #20c99720;
+        }
+        
+        .bg-purple * {
+            color: #000022dd !important;
+        }
+        
+        .card * {
+            background-color: #343a40;
+            color: #ffffff;
+        }
+        
+        .user-image {
+            border-radius: 50%;
+            border: 5px solid #ffffff;
+        }
+        
+        .text-bold {
+            font-weight: bolder;
+        }
+        
+        .text-semi-muted {
+            color: #ffffff90;
+        }
+        
+        .fa-lg {
+            font-size: 1.5rem;
+        }
+        
+        .card-footer hr {
+            border-top: 1px solid #ffffff80;
+        }
+        
+        .img-card {
+            box-shadow: 0px 5px 15px #00000090;
+        }
+        
+        input.card-controls-check:not(:checked)+label.card-controls-lbl i.faz {
+            font-weight: 400 !important;
+            font-family: "Font Awesome 5 Free";
+            font-style: normal;
+        }
+        
+        input.card-controls-check:checked+label.card-controls-lbl i.faz {
+            font-weight: 900 !important;
+            font-family: "Font Awesome 5 Free";
+            font-style: normal;
+        }
+        
+        .offcanvas-header {
+            background-color: #20c997;
+        }
+        
+        .offcanvas-body .card {
+            border: 1px solid #000000;
+            border-radius: 0px;
+        }
+        
+        .offcanvas-footer {
+            box-shadow: 0px, 0px, 10px, #000000;
+        }
+        
+        .btn-info {
+            background-color: #20c997;
+            border: 1px solid #20c997;
+        }
+        
+        #loadMore {
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar  bg-purple sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="camera" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="width: 30px;">
+                    <path fill="currentColor" d="M512 144v288c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V144c0-26.5 21.5-48 48-48h88l12.3-32.9c7-18.7 24.9-31.1 44.9-31.1h125.5c20 0 37.9 12.4 44.9 31.1L376 96h88c26.5 0 48 21.5 48 48zM376 288c0-66.2-53.8-120-120-120s-120 53.8-120 120 53.8 120 120 120 120-53.8 120-120zm-32 0c0 48.5-39.5 88-88 88s-88-39.5-88-88 39.5-88 88-88 88 39.5 88 88z"></path>
+                </svg> <span class="ms-2">Instaham</span>
+            </a>
+            <div>
+                <i class="fa fa-plus-square fa-2x" aria-hidden="true"></i>
+                <i class="fa fa-heart fa-2x mx-2" aria-hidden="true"></i>
+                <i class="fa fa-comment fa-2x" aria-hidden="true"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col p-0" id="imgs">
+
+
+
+            </div>
+            <div class="row" id="loadMore">
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasComments" aria-labelledby="offcanvasCommentsLabel">
+        <div class="offcanvas-header">
+            <h5 id="offcanvasCommentsLabel">Comment on <span id="un"></span>'s photo</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body p-0">
+            <div class="row">
+                <div class="col" id="commentsCol">
+
+
+                </div>
+            </div>
+        </div>
+        <div class="offcanvas-footer">
+
+            <div class="p-3">
+                <div class="form-floating">
+                    <input class="form-control" placeholder="Leave a comment here" id="floating"></input>
+                    <label for="floating">Comments</label>
+                </div>
+                <button class="btn btn-info btn-lg float-end my-2" type="button" data-bs-dismiss="offcanvas">Post</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
+    <script>
+        $(function() {
+            $.get('js/postdata.json', function(d) {
+                var comments = d.comments;
+                for (i = 0; i < 10; i++) {
+                    $('#imgs').append(createPost());
+                }
+
+                function createPost() {
+                    var uuid = crypto.randomUUID();
+                    var mw = ['men', 'women'][randbetween(0, 1)];
+                    var n = randbetween(0, 99);
+                    var pURL = 'https://randomuser.me/api/portraits/med/';
+                    var userpic = `${pURL}${mw}/${n}.jpg`;
+                    var hampics = d.hampics;
+                    var hampic = hampics[Math.floor(Math.random() * hampics.length)];
+                    var comment = comments[Math.floor(Math.random() * comments.length)];
+
+                    var usernames = d.usernames;
+
+                    var uName = usernames[Math.floor(Math.random() * usernames.length)] + ['', '_', '__', '___'][randbetween(0, 3)] + ['', randbetween(1, 2000), randbetween(1, 5)][randbetween(0, 2)];
+
+                    var cmt1 = randbetween(3, 20);
+                    var cmt2 = randbetween(1, 75);
+                    var cmt3 = randbetween(1, 500);
+                    var commentCount = [cmt1, cmt1, cmt1, cmt2, cmt2, cmt3][randbetween(0, 5)];
+                    var c = `                    
+                    <div class="card mb-3 img-card">
+                        <div class="card-header d-flex align-items-center">
+                            <img src="${userpic}" alt="" class="user-image">
+                            <div class="ms-3 me-auto h5">${uName}</div>
+                        </div>
+                        <div class="card-body p-0">
+                            <img class="card-img-top w-100" src="${hampic}" alt="">
+                        </div>
+                        <div class="card-footer">
+                            <p value="${commentCount}" data-rel-val="${uuid}">${commentCount} likes</p>
+                            <div class="d-block">
+                                <input type="checkbox" class="card-controls-check" name="c" type="checkbox" data-rel-check="${uuid}" id="${uuid}" hidden>
+                                <label class="btn btn-link-light card-controls-lbl" type="button" for="${uuid}">
+                                    <i class="faz fa-heart fa-2x"></i>
+                                </label>
+
+                                <button class="btn btn-link-light comment-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasComments" aria-controls="offcanvasComments" data-user-name="${uName}">
+                                    <i class="far fa-comment fa-2x" data-bs-toggle="offcanvas" data-bs-target="#offcanvasComments" aria-controls="offcanvasComments"></i>
+                                </button>
+                                
+                                <a href="mailto:myemail@email.net?subject=Testing out mailto!" class="btn btn-link-light">
+                                    <i class="far fa-paper-plane fa-2x"></i>
+                                </a>
+                            </div>
+                            <hr>
+                            <div><span class="text-bold me-2">${uName}</span><span class="text-semi-muted">${comment}</span></div>
+                            <p class="text-muted">view all 22 comments</p>
+                        </div>
+                    </div>
+                    `;
+                    return c;
+                }
+
+
+                $(window).scroll(function() {
+                    if ($(window).scrollTop() > $('#imgs').height() - 1000) {
+                        for (i = 0; i < 20; i++) {
+                            $('#imgs').append(createPost());
+                        }
+                    }
+                });
+
+                $('#imgs').on('change', '.card-controls-check', function() {
+                    var relcheck = $(this).attr('data-rel-check');
+                    var likecount = `p[data-rel-val="${relcheck}"]`;
+
+                    if (this.checked) {
+                        $(likecount).attr('value', parseInt($(likecount).attr('value')) + 1);
+                    } else {
+                        $(likecount).attr('value', parseInt($(likecount).attr('value')) - 1);
+                    }
+
+                    $(likecount).html($(likecount).attr('value') + ' likes');
+
+                });
+
+                $('#imgs').on('click', '.comment-btn', function() {
+                    var usernames = d.usernames;
+                    $('commentsCol').html('');
+                    $('#un').html($(this).attr('data-user-name'));
+
+                    var commentCount = randbetween(10, 500);
+
+                    for (i = 0; i < commentCount; i++) {
+                        var rUName = usernames[Math.floor(Math.random() * usernames.length)] + randbetween(50, 2000);
+
+                        var mw = ['men', 'women'][randbetween(0, 1)];
+                        var n = randbetween(0, 99);
+                        var pURL = 'https://randomuser.me/api/portraits/med/';
+                        var userpic = `${pURL}${mw}/${n}.jpg`;
+                        var rc1 = comments[Math.floor(Math.random() * comments.length)];
+                        var rc2 = 'haha';
+                        var rc3 = 'wow';
+                        var rc4 = 'lol';
+                        var rc5 = 'lmao';
+                        var randcomment = [rc1, rc2, rc2, rc2, rc2, rc2, rc2, rc3, rc4, rc5, rc1, rc1, rc1, rc1][randbetween(0, 13)];
+
+                        var commentC = `
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <img class="user-image" src="${userpic}" alt="" style="height: 60px; width: 60px;">
+                                        </div>
+                                        <div class="col">
+                                            <h5 class="card-title">${rUName}</h5>
+                                            <p class="card-text">${randcomment}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+
+                        $('#commentsCol').append(commentC);
+                    }
+                });
+
+
+            });
+
+            function randbetween(min, max) {
+                return Math.floor(Math.random() * (max - min + 1) + min);
+            }
+
+        });
+    </script>
+
+</body>
+
+</html>
